@@ -1,0 +1,11 @@
+<h1>Update Event</h1>
+
+<form action="/events/<%=@event.id%>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+
+  <label>Event:</label>
+  <input type="text" name="content" value="<%= @event.content%>"></input><br>
+  <br>
+
+    <button id="submit" type="submit" >Edit Tweet</button>
+</form>
