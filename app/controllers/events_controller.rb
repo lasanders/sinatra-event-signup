@@ -24,53 +24,56 @@ class EventsController < ApplicationController
     else
       user = User.find_by_id(session[:user_id])
       @event = Event.create(:title => params[:title], :date => params[:date], :volunteers_needed => params[:volunteers_needed], :description => params[:description], :user_id => user.id)
-      redirect to "/tweets/#{@tweet.id}"
+      redirect to "/events/#{@event.id}"
     end
   end
 
-  get '/tweets/:id' do
+  get '/events/:id' do
     if session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
-      erb :'tweets/show'
+      @event = Event.find_by_id(params[:id])
+      erb :'events/show'
     else
       redirect to '/login'
     end
   end
 
 
-  get '/tweets/:id/edit' do
+  get '/events/:id/edit' do
     if session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == session[:user_id]
-        erb :'tweets/edit'
+      @event = Event.find_by_id(params[:id])
+      if @event.user_id == session[:user_id]
+        erb :'events/edit'
       else
-        redirect to '/tweets'
+        redirect to '/events'
       end
     else
       redirect to '/login'
     end
   end
 
-  patch '/tweets/:id' do
-    if params[:content] == nil
-    redirect to "/tweets/#{@tweet.id}"
+  patch '/events/:id' do
+    if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
+    redirect to "/events/#{@event.id}"
     else
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.content = params[:content]
+      @event = Event.find_by_id(params[:id])
+      @event.title = params[:title]
+      @event.date = params[:date]
+      @event.volunteers_needed = params[:volunteers_needed]
+      @event.description = params[:description]
       @tweet.save
-          redirect to "/tweets/#{@tweet.id}/edit"
+          redirect to "/events/#{@event.id}/edit"
     end
   end
 
 
-  delete '/tweets/:id/delete' do
+  delete '/events/:id/delete' do
     if session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == session[:user_id]
-        @tweet.delete
-        redirect to '/tweets'
+      @event = Event.find_by_id(params[:id])
+      if @event.user_id == session[:user_id]
+        @event.delete
+        redirect to '/events'
       else
-        redirect to '/tweets'
+        redirect to '/events'
       end
     else
       redirect to '/login'
