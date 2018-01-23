@@ -10,7 +10,7 @@ class UsersController < ApplicationController
      erb :'users/signup'
    else
 
-     redirect '/tweets'
+     redirect '/events'
  end
 end
 
@@ -23,7 +23,7 @@ end
    @user.save
    session[:user_id] = @user.id
 
-   redirect '/tweets'
+   redirect '/events'
  end
 end
 
@@ -31,7 +31,7 @@ end
     if !logged_in?
       erb :'users/login'
     else
-      redirect '/tweets'
+      redirect '/events'
     end
   end
 
@@ -39,7 +39,7 @@ end
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect '/tweets'
+      redirect '/events'
     else
       redirect '/signup'
     end
