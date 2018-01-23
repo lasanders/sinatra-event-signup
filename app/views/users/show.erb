@@ -1,0 +1,4 @@
+<p>Your Events: <%= @user.username %>
+ <% @user.events.each do |event| %>
+    <%= event.title %>
+      <%end%>
