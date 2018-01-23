@@ -60,7 +60,7 @@ class EventsController < ApplicationController
       @event.date = params[:date]
       @event.volunteers_needed = params[:volunteers_needed]
       @event.description = params[:description]
-      @tweet.save
+      @event.save
           redirect to "/events/#{@event.id}/edit"
     end
   end
