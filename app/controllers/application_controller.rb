@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions unless test?
-    set :session_secret, "secret"
+    set :session_secret, "signup_secret"
 end
 
 get '/' do
