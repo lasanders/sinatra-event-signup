@@ -29,7 +29,7 @@ end
 
   get '/login' do
     if !logged_in?
-      erb :'/login'
+      erb :'users/login'
     else
       redirect '/events/home'
     end
@@ -37,8 +37,8 @@ end
 
   post '/login' do
     # @user = User.create(params[:user])
-    # @user = User.find_by(:username => params[:username])
-    if @user && user.authenticate(params[:password])
+     @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/events/home'
     else
