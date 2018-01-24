@@ -42,29 +42,31 @@ class EventsController < ApplicationController
   get '/events/:id/edit' do
     if session[:user_id]
       @event = Event.find_by_id(params[:id])
-      if @event.user_id == session[:user_id]
+       if @event.user_id == session[:user_id]
         erb :'events/edit'
-      else
-        redirect to '/events'
-      end
     else
+      redirect to '/events'
+    end
+  else
       redirect to '/login'
     end
   end
 
   patch '/events/:id' do
     if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
-      redirect to "/events/#{@event.id}"
+      redirect to "/events/#{@event.id}/edit"
     else
       @event = Event.find_by_id(params[:id])
+      @event.user_id == session[:user_id]
       @event.title = params[:title]
       @event.date = params[:date]
       @event.volunteers_needed = params[:volunteers_needed]
       @event.description = params[:description]
       @event.save
-      redirect to "/events/#{@event.id}/edit"
+      redirect to "/events/#{@event.id}"
     end
   end
+
 
 
   delete '/events/:id/delete' do
