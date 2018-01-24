@@ -2,10 +2,9 @@ class UsersController < ApplicationController
 
   get '/users/show' do
     if session[:user_id]
-      # session[:user_id] = @user.id
       @events = Event.all
       @user = User.find_by_id(session[:user_id])
-       @event= Event.create(:content => params[:content], :user_id => @user.id)
+      @event = Event.create(:title => params[:title], :date => params[:date], :volunteers_needed => params[:volunteers_needed], :description => params[:description], :user_id => @user.id)
       erb :'users/show'
     else
       redirect to 'users/login'
@@ -18,26 +17,26 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-   if !session[:user_id]
-     erb :'users/signup'
-   else
+    if !session[:user_id]
+      erb :'users/signup'
+    else
 
-     redirect '/events'
- end
-end
+      redirect '/events'
+    end
+  end
 
   post '/signup' do
     if params[:username].empty? || params[:password].empty? || params[:email].empty?
       redirect '/signup'
 
     else
-   @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-   @user.save
-   session[:user_id] = @user.id
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
+      session[:user_id] = @user.id
 
-   redirect '/events'
- end
-end
+      redirect '/events'
+    end
+  end
 
   get '/login' do
     if !session[:user_id]
@@ -49,7 +48,7 @@ end
 
   post '/login' do
     # @user = User.create(params[:user])
-     user = User.find_by(:username => params[:username])
+    user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect '/events'
@@ -62,9 +61,9 @@ end
     if session[:user_id] != nil
       session.clear
       redirect to '/login'
-  else
-  redirect to '/'
-   end
-end
-
+    else
+      redirect to '/'
+    end
   end
+
+end

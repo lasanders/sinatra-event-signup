@@ -3,7 +3,8 @@ class EventsController < ApplicationController
   get '/events' do
     if session[:user_id]
       @events = Event.all
-       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user = User.find_by_id(session[:user_id])
+      @event = Event.create(:title => params[:title], :date => params[:date], :volunteers_needed => params[:volunteers_needed], :description => params[:description], :user_id => @user.id)
       erb :'events/home'
     else
       redirect to 'users/login'
@@ -53,7 +54,7 @@ class EventsController < ApplicationController
 
   patch '/events/:id' do
     if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
-    redirect to "/events/#{@event.id}"
+      redirect to "/events/#{@event.id}"
     else
       @event = Event.find_by_id(params[:id])
       @event.title = params[:title]
@@ -61,7 +62,7 @@ class EventsController < ApplicationController
       @event.volunteers_needed = params[:volunteers_needed]
       @event.description = params[:description]
       @event.save
-          redirect to "/events/#{@event.id}/edit"
+      redirect to "/events/#{@event.id}/edit"
     end
   end
 
