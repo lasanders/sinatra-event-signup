@@ -1,11 +1,15 @@
 <h1>Update Event</h1>
 
-<form action="/events/<%=@event.id%>" method="POST">
+<form action="/events/<%=@event.id%/edit>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
 
   <label>Event:</label>
-  <input type="text" name="content" value="<%= @event.content%>"></input><br>
+  Title: <input type="text" name="title" value="<%= @event.title%>"></input><br>
+  Date: <input type="integer" name="date" value="<%= @event.date%>"></input><br>
+  Volunteers Needed: <input type="text" name="volunteers Needed" value="<%= @event.volunteers_needed%>"></input><br>
+  Description: <input type="text" name="descrition" value="<%= @event.description%>"></input><br>
   <br>
+
 
     <button id="submit" type="submit" >Edit Tweet</button>
 </form>
