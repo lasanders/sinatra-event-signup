@@ -1,7 +1,10 @@
 <h1> Welcome, <%=@user.username %></h1>
-<h2> Upcoming Events </h2>
+<h2>Upcoming Events </h2>
 <% @events.each do |event| %>
-<h4><%= event.title %></h4>
+<!-- <h4><%= event.title %></h4> -->
+<a href="/events/event.id"><%=event.title%></a><br>
 <%end%>
 
   <button><a href="/logout">Logout</a></button>
+  
+  

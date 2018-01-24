@@ -1,4 +1,4 @@
-<p>Your Events: <%= @user.username %>
+<h1>Your Events <%= @user.username %>:</h1>
  <% @user.events.each do |event| %>
-    <%= event.title %>
+    <h3><%= event.title %></h3>
       <%end%>
