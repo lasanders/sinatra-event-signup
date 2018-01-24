@@ -1,7 +1,19 @@
 class UsersController < ApplicationController
 
+  get '/users/show' do
+    if session[:user_id]
+      # session[:user_id] = @user.id
+      @events = Event.all
+      @user = User.find_by_id(session[:user_id])
+       @event= Event.create(:content => params[:content], :user_id => @user.id)
+      erb :'users/show'
+    else
+      redirect to 'users/login'
+    end
+  end
+
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
+    @user = User.find_by(:username => params[:username])
     erb :'users/show'
   end
 
@@ -28,19 +40,19 @@ end
 end
 
   get '/login' do
-    if !logged_in?
+    if !session[:user_id]
       erb :'users/login'
     else
-      redirect '/events/home'
+      redirect '/events'
     end
   end
 
   post '/login' do
     # @user = User.create(params[:user])
-     @user = User.find_by(:username => params[:username])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect '/events/home'
+     user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect '/events'
     else
       redirect '/signup'
     end
