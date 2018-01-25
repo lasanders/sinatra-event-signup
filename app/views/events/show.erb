@@ -7,12 +7,14 @@
    <form action="/events/<%=@event.id%>/delete" method="POST">
      <input type="hidden" name="_method" value="DELETE">
   <button type="submit" value="Delete Events">Delete Event</button>
-</form>
+</form><br>
 <form action="/events/<%=@event.id%>/edit" method="POST">
   <input type="hidden" name="_method" value="PATCH">
 <button type="submit" value="Edit Events">Edit Event</button>
+<button><a href="/events">Home</a></button>
+<button><a href="/events/new">New Event</a></button>
 </form>
 
 
-<button><a href="/events">Home</a></button>
-<button><a href="/events/new">New Event</a></button>
+<!-- <button><a href="/events">Home</a></button>
+<button><a href="/events/new">New Event</a></button> -->
