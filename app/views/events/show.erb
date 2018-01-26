@@ -1,18 +1,22 @@
-<!-- <h1><label>Event Title: </label></h1><br> -->
+
  <h1><%= @event.title %></h1>
  <h3>Date: <%= @event.date %></h3>
  <h3>Volunteers Needed: <%= @event.volunteers_needed %></h3>
- <h3>Description: <%= @event.description %><br></h3><br></br>
+ <h3>Description: <%= @event.description %><br></h3><br>
+
+ <% if flash.has?(:message) %>
+  <h3><%= flash[:message] %></h3>
+  <%end%><br>
 
    <form action="/events/<%=@event.id%>/delete" method="POST">
      <input type="hidden" name="_method" value="DELETE">
   <button type="submit" value="Delete Events">Delete Event</button>
-</form>
+
 
 <button><a href="/events/<%=@event.id%>/edit">Edit Event </a></button>
 <button><a href="/events">Home</a></button>
 <button><a href="/events/new">New Event</a></button>
-
+</form>
 
 <!-- <button><a href="/events">Home</a></button>
 <button><a href="/events/new">New Event</a></button> -->

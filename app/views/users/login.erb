@@ -6,4 +6,8 @@
     Email: <input type="text" name="email"></input>
     Password: <input type="password" name="password"></input>
     <button id="submit" type="submit" >Submit</button></input>
-  </form>
+  </form><br>
+
+  <% if flash.has?(:message) %>
+   <h3><%= flash[:message] %></h3>
+   <%end%><br>

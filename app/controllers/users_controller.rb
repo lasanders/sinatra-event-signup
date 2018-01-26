@@ -1,4 +1,6 @@
+require 'rack-flash'
 class UsersController < ApplicationController
+  use Rack::Flash
 
   get '/users/show' do
     if session[:user_id]
@@ -60,6 +62,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if session[:user_id] != nil
       session.clear
+      flash[:message] = "You have signed out. Please Log In"
       redirect to '/login'
     else
       redirect to '/'
