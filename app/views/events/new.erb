@@ -9,6 +9,7 @@ Description: <input type="text" name="description"></input><br>
 <br></br>
 <br></br>
   <button id="submit" type="submit" >Submit</button>
-</form>
-</body>
-</html>
+
+  <% if flash.has?(:message) %>
+   <h3><%= flash[:message] %></h3>
+   <%end%><br>

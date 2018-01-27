@@ -23,6 +23,7 @@ class EventsController < ApplicationController
 
   post '/events' do
     if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
+        flash[:message] = "Please try again. All field must be filled in."
       redirect to "/events/new"
     else
       user = User.find_by_id(session[:user_id])
