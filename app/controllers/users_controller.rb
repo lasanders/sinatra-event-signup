@@ -13,11 +13,6 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/:slug' do
-    @user = User.find_by(:username => params[:username])
-    erb :'users/show'
-  end
-
   get '/signup' do
     if !session[:user_id]
       erb :'users/signup'
@@ -49,12 +44,12 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    # @user = User.create(params[:user])
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect '/events'
     else
+      flash[:message] = "I'm sorry, but we can't find your account. Please Signup, or return to the Login page"
       redirect '/signup'
     end
   end

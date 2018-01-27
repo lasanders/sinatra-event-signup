@@ -55,6 +55,7 @@ class EventsController < ApplicationController
   patch '/events/:id' do
     if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
       redirect to "/events/#{@event.id}/edit"
+        flash[:message] = "Edit was unsuccessful. Please try again."
     else
 
       @event = Event.find_by_id(params[:id])
@@ -63,7 +64,7 @@ class EventsController < ApplicationController
       @event.volunteers_needed = params[:volunteers_needed]
       @event.description = params[:description]
       @event.save
-      flash[:message] = "Successfully updated event."
+      flash[:message] = "You have successfully updated event."
       redirect to "/events/#{@event.id}"
     end
   end
@@ -73,12 +74,12 @@ class EventsController < ApplicationController
       @event = Event.find_by_id(params[:id])
       if @event.user_id == session[:user_id]
         @event.delete
+        flash[:message] = "You have successfully deleted event."
         redirect to '/events'
       else
         redirect to '/events'
       end
     else
-      flash[:message] = "Successfully deleted event."
       redirect to '/login'
     end
   end
