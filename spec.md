@@ -9,7 +9,7 @@ Specs:
 - [x] Ensure that users can't modify content created by other users - I have prevented a user from modifying others' content by setting the session[:user_id] == event.user_id
 - [X] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying - Events belong_to a User. I have setup routes to create, view, update, and delete an event.
 - [X] Include user input validations - I have validations in place to verify a user password. If a User input cannot be validated, they are redirected to the login page.
-- [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
+- [X] Display validation failures to user with error message (example form URL e.g. /posts/new) - Displayed error message when edit, login weren't valid, and success messages when edit, delete and logout were successfull
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
