@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect '/events'
     else
-      flash[:message] = "I'm sorry, but we can't find your account. Please Signup, or return to the Login page"
+      flash[:message] = "I'm sorry, but we can't find your account. Please Signup, or return to the Login page and try again."
       redirect '/signup'
     end
   end

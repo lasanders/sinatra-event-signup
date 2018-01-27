@@ -52,10 +52,11 @@ class EventsController < ApplicationController
     end
   end
 
-  patch '/events/:id' do
-    if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
-      redirect to "/events/#{@event.id}/edit"
-        flash[:message] = "Edit was unsuccessful. Please try again."
+patch '/events/:id' do
+    if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == "" || Event.find_by_id(params[:id]) == nil
+      flash[:message] = "Edit was unsuccessful. Please try again."
+      redirect to "/users/show"
+
     else
 
       @event = Event.find_by_id(params[:id])

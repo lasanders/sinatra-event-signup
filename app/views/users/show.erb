@@ -6,3 +6,8 @@
       <button><a href="/events">Home</a></button>
       <button><a href="/events/new">New Event</a></button>
       <button><a href="/logout">Logout</a></button>
+
+
+      <% if flash.has?(:message) %>
+       <h3><%= flash[:message] %></h3>
+       <%end%><br>
