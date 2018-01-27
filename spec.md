@@ -8,7 +8,7 @@ Specs:
 - [X] Include user accounts - I created a few dummy users
 - [x] Ensure that users can't modify content created by other users - I have prevented a user from modifying others' content by setting the session[:user_id] == event.user_id
 - [X] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying - Events belong_to a User. I have setup routes to create, view, update, and delete an event.
-- [X] Include user input validations - I have validations in place to verify a user password. If a User input cannot be validated, they are redirected to the login page. I have also put in validations for the edit page, so the user knows that all fields are required.
+- [X] Include user input validations - I have validations in place to verify a user password. If a User input cannot be validated, they are redirected to the login page. I have also put in validations for the edit page and new event page, so the user knows that all fields are required.
 - [X] Display validation failures to user with error message (example form URL e.g. /posts/new) - Displayed error message when edit, login weren't valid, and success messages when edit, delete and logout were successful
 - [X] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code - I attached a LICENSE.md and CONTRIBUTING.md file to this application and provided a link to view in browser.
 
