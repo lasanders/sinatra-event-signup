@@ -26,17 +26,16 @@ class UsersController < ApplicationController
     if params[:username].empty? || params[:password].empty? || params[:email].empty?
       flash[:message] = "All fields must be filled in, please try again."
       redirect '/signup'
-
-    else
-      user = User.find_by(:username => params[:username])
+    end
+      if user = User.find_by(:username => params[:username])
       flash[:message] = "This username has already been taken, please try again."
     redirect '/signup'
   end
-    if @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password]).uniq
+     if @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
       session[:user_id] = @user.id
-
       redirect '/events'
+
     end
   end
 
