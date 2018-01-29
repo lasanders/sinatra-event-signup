@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20180123203949) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.string "comments"
   end
 
 end

@@ -53,7 +53,7 @@ class EventsController < ApplicationController
 
 patch '/events/:id' do
   @event = Event.find_by_id(params[:id])
-    if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
+    if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == "" || @event.user_id != session[:user_id]
       flash[:message] = "Edit was unsuccessful. Please try again."
       redirect to "/users/show"
     else
