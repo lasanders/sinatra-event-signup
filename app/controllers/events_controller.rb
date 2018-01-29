@@ -51,6 +51,27 @@ class EventsController < ApplicationController
     end
   end
 
+  get '/events/:id/comments' do
+    if session[:user_id]
+      @event = Event.find_by_id(params[:id])
+      erb :'/events/comments'
+    else
+      redirect to 'users/login'
+    end
+  end
+
+  post '/events/:id/comments' do
+        @event = Event.find_by_id(params[:id])
+        # @event.title = params[:title]
+        # @event.date = params[:date]
+        # @event.volunteers_needed = params[:volunteers_needed]
+        # @event.description = params[:description]
+        @event.comments = params[:comments]
+        @event.save
+        flash[:message] = "You have successfully commented."
+        redirect to "/events/#{@event.id}"
+      end
+
 patch '/events/:id' do
   @event = Event.find_by_id(params[:id])
     if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == "" || @event.user_id != session[:user_id]
@@ -68,6 +89,7 @@ patch '/events/:id' do
       redirect to "/events/#{@event.id}"
     end
   end
+
 
   delete '/events/:id/delete' do
     if session[:user_id]
