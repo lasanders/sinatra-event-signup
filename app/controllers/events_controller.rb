@@ -43,10 +43,8 @@ class EventsController < ApplicationController
   end
 
   get '/events/:id/edit' do
-    if session[:user_id]
-      @event = Event.find_by_id(params[:id])
-       @event.user_id == session[:user_id]
-
+    @event = Event.find_by_id(params[:id])
+    if @event.user_id == session[:user_id]
         erb :'events/edit'
   else
       redirect to '/login'
@@ -54,12 +52,11 @@ class EventsController < ApplicationController
   end
 
 patch '/events/:id' do
-    if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == "" || Event.find_by_id(params[:id]) == nil
+  @event = Event.find_by_id(params[:id])
+    if params[:title] == "" || params[:date] == "" || params[:volunteers_needed] == "" || params[:description] == ""
       flash[:message] = "Edit was unsuccessful. Please try again."
       redirect to "/users/show"
-
     else
-
       @event = Event.find_by_id(params[:id])
       @event.title = params[:title]
       @event.date = params[:date]
@@ -79,6 +76,7 @@ patch '/events/:id' do
         flash[:message] = "You have successfully deleted event."
         redirect to '/events'
       else
+        flash[:message] = "I'm sorry, you don't have permission to delete this event."
         redirect to '/events'
       end
     else
