@@ -62,15 +62,16 @@ class EventsController < ApplicationController
 
   post '/events/:id/comments' do
         @event = Event.find_by_id(params[:id])
-        # @event.title = params[:title]
-        # @event.date = params[:date]
-        # @event.volunteers_needed = params[:volunteers_needed]
-        # @event.description = params[:description]
         @event.comments = params[:comments]
+        if !params[:event][:comments].include?(comment)
+          @event.feedback = @event.comment.all
+      @event.feedback << @event.comment.create(params[:comment])
+
         @event.save
         flash[:message] = "You have successfully commented."
         redirect to "/events/#{@event.id}"
       end
+    end
 
 patch '/events/:id' do
   @event = Event.find_by_id(params[:id])
