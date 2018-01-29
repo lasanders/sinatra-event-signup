@@ -63,6 +63,7 @@ class EventsController < ApplicationController
   post '/events/:id/comments' do
         @event = Event.find_by_id(params[:id])
         @event.comments = params[:comments]
+         @event.update(params[:comments])
          @event.save
         flash[:message] = "You have successfully commented."
         redirect to "/events/#{@event.id}"
