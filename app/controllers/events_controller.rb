@@ -62,6 +62,7 @@ patch '/events/:id' do
       @event.date = params[:date]
       @event.volunteers_needed = params[:volunteers_needed]
       @event.description = params[:description]
+      @event.comments = params[:comments]
       @event.save
       flash[:message] = "You have successfully updated event."
       redirect to "/events/#{@event.id}"
