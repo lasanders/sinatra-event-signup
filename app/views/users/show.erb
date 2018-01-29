@@ -1,7 +1,7 @@
 <h1>Your Events and Comments, <%= @user.username %>:</h1>
  <% @user.events.each do |event| %>
     <h3><a href="/events/<%=event.id%>"><%= event.title %></a></h3>
-    <h4><%= @event.comment %></h4>
+    <h4><%= event.comments %></h4>
       <%end%>
 
 

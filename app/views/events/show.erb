@@ -3,7 +3,7 @@
  <h3>Volunteers Needed: <%= @event.volunteers_needed %></h3>
  <h3>Description: <%= @event.description %><br></h3><br>
  <h4><%= @event.comments %></h4>
-
+<%@event.save%>
 
    <form action="/events/<%=@event.id%>/delete" method="POST">
      <input type="hidden" name="_method" value="DELETE">
