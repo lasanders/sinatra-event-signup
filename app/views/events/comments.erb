@@ -4,6 +4,6 @@
 <h3>Description: <%= @event.description %><br></h3><br>
 
    <form action="/events/<%=@event.id%>/comments" method="POST">
-Comments: <input type="text" name="comments"></input><br>
+Comments: <input type="text" name="comments" value="<%= @event.comments%>"></input><br>
 </form>
   <button id="submit" type="submit" >Submit</button>
