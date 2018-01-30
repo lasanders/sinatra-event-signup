@@ -5,5 +5,7 @@
 
    <form action="/events/<%=@event.id%>/comments" method="POST">
 Comments: <input type="text" name="comments" value="<%= @event.comments%>"></input><br>
-</form>
+<%if @event.comments != ""%><input type="text" name="new_comments" ></input>
+<%end%>
   <button id="submit" type="submit" >Submit</button>
+</form>
