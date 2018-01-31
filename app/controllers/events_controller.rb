@@ -51,24 +51,6 @@ class EventsController < ApplicationController
     end
   end
 
-  get '/events/:id/comments' do
-    if session[:user_id]
-      @event = Event.find(params[:id])
-      erb :'/events/comments'
-    else
-      redirect to 'users/login'
-    end
-  end
-
-  post '/events/:id/comments' do
-        @event = Event.find_by_id(params[:id])
-         @event.comments = params[:comments]
-
-         @event.save
-        flash[:message] = "You have successfully commented."
-        redirect to "/events/#{@event.id}"
-      end
-# end
 
 patch '/events/:id' do
   @event = Event.find_by_id(params[:id])
