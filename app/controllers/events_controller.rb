@@ -6,7 +6,6 @@ class EventsController < ApplicationController
     if session[:user_id]
       @events = Event.all
       @user = User.find_by_id(session[:user_id])
-      @event = Event.create(:title => params[:title], :date => params[:date], :volunteers_needed => params[:volunteers_needed], :description => params[:description], :user_id => @user.id)
       erb :'events/home'
     else
       redirect to 'users/login'
@@ -45,12 +44,15 @@ class EventsController < ApplicationController
   get '/events/:id/edit' do
     if session[:user_id]
       @event = Event.find_by_id(params[:id])
-       @event.user_id == session[:user_id]
+        if @event.user_id == session[:user_id]
 
         erb :'events/edit'
   else
-      redirect to '/login'
+      redirect to '/events'
     end
+  else
+    redirect to '/login'
+  end
   end
 
 patch '/events/:id' do
