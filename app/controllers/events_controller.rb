@@ -5,7 +5,9 @@ class EventsController < ApplicationController
   get '/events' do
     if session[:user_id]
       @events = Event.all
+      @comments = Comment.all
       @user = User.find_by_id(session[:user_id])
+      @event.comment = Comment.create(:name => params[:name], :user_id => @user.id)
       erb :'events/home'
     else
       redirect to 'users/login'
@@ -27,6 +29,7 @@ class EventsController < ApplicationController
     else
       user = User.find_by_id(session[:user_id])
       @event = Event.create(:title => params[:title], :date => params[:date], :volunteers_needed => params[:volunteers_needed], :description => params[:description], :user_id => user.id)
+      @comment = Comment.create(:name => params[:name], :user_id => @user.id)
       redirect to "/events/#{@event.id}"
     end
   end
@@ -67,6 +70,7 @@ patch '/events/:id' do
       @event.date = params[:date]
       @event.volunteers_needed = params[:volunteers_needed]
       @event.description = params[:description]
+      @event.comment = (params[:name])
       @event.save
       flash[:message] = "You have successfully updated event."
       redirect to "/events/#{@event.id}"

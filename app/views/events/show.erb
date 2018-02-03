@@ -2,7 +2,8 @@
  <h3>Date: <%= @event.date %></h3>
  <h3>Volunteers Needed: <%= @event.volunteers_needed %></h3>
  <h3>Description: <%= @event.description %><br></h3><br>
-
+ <% @user.comment.each do |comment| %>
+ <h3>Comment: <%= comment %></h3><br>
    <form action="/events/<%=@event.id%>/delete" method="POST">
      <input type="hidden" name="_method" value="DELETE">
   <button type="submit" value="Delete Events">Delete Event</button>

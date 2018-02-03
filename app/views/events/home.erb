@@ -3,6 +3,9 @@
 <% @events.each do |event| %>
 <h4><%= event.date %><a href="/events/<%=event.id%>"><%= event.title %></a></h4>
   <%end%>
+  <% @comments.each do |comment| %>
+ <h3>Comment: <%= comment.id %></h3><br>
+  <%end%>
 
 <button><a href="/users/show">My Events</a></button>
 <button><a href="/events/new">New Event</a></button>
